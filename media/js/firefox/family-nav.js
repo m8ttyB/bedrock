@@ -19,33 +19,33 @@ if (typeof window.Mozilla === 'undefined') {
         }
 
         // entire fx family nav wrapper
-        var $fxFamilyHeader = $('#fxfamilynav-header');
+        var $fxFamilyHeaderV1 = $('#fxfamilynavV1-header');
 
         // just the <nav> - primary, sub, and tertiary navs
-        var $fxFamilyNav = $('#fxfamilynav');
+        var $fxFamilyNavV1 = $('#fxfamilynavV1');
 
         // just the <a> tags in the top level nav
-        var $primaryLinks = $fxFamilyNav.find('.primary-link');
+        var $primaryLinks = $fxFamilyNavV1.find('.primary-link');
 
         // little ... button that triggers tertiary display
-        var $tertiaryNavTrigger = $('#fxfamilynav-tertiarynav-trigger');
+        var $tertiaryNavTriggerV1 = $('#fxfamilynavV1-tertiarynav-trigger');
 
         // wrappers for sub/tertiary navs
-        var $subNavContainer = $('#fxfamilynav-subnav');
-        var $tertiaryNavContainer = $('#fxfamilynav-tertiarynav');
+        var $subNavContainerV1 = $('#fxfamilynavV1-subnav');
+        var $tertiaryNavContainerV1 = $('#fxfamilynavV1-tertiarynav');
 
         // all ul.subnav elements
-        var $subNavs = $fxFamilyNav.find('.subnav');
+        var $subNavs = $fxFamilyNavV1.find('.subnav');
 
         // all ul.tertiarynav elements
-        var $tertiaryNavs = $fxFamilyNav.find('.tertiarynav');
+        var $tertiaryNavs = $fxFamilyNavV1.find('.tertiarynav');
 
         // used to revert subnav after hovering off non-selected primary link
         var currentNavId;
         var currentSubNavId;
 
         // CTA wrapper
-        var $ctaWrapper = $('#fxfamilynav-cta-wrapper');
+        var $ctaWrapperV1 = $('#fxfamilynavV1-cta-wrapper');
 
         // initialize the thing
         var _initMq = function() {
@@ -67,15 +67,15 @@ if (typeof window.Mozilla === 'undefined') {
             // remember to revert subnav on mouseout
             currentSubNavId = subNavId;
 
-            $subNavContainer.animate({ opacity: 0 }, 200, function() {
+            $subNavContainerV1.animate({ opacity: 0 }, 200, function() {
                 // hide all subnavs
                 $subNavs.removeClass('active');
 
                 // show the correct subnav
-                $subNavContainer.find('.subnav[data-parent="' + subNavId + '"]').addClass('active');
+                $subNavContainerV1.find('.subnav[data-parent="' + subNavId + '"]').addClass('active');
 
                 // re-display subnav container
-                $subNavContainer.animate({ opacity: 1 }, 200);
+                $subNavContainerV1.animate({ opacity: 1 }, 200);
             });
         };
 
@@ -92,7 +92,7 @@ if (typeof window.Mozilla === 'undefined') {
 
         // wire up all desktop interactions
         var _enableDesktop = function() {
-            $subNavContainer.removeClass('hidden');
+            $subNavContainerV1.removeClass('hidden');
 
             $primaryLinks.on('mouseover focus', function() {
                 var $this = $(this);
@@ -105,59 +105,59 @@ if (typeof window.Mozilla === 'undefined') {
             });
 
             // revert subnav to default when mouseleaving nav area
-            $fxFamilyNav.on('mouseleave blur', function() {
+            $fxFamilyNavV1.on('mouseleave blur', function() {
                 if (currentSubNavId !== currentNavId) {
                     _displaySubNav(currentNavId);
                 }
             });
 
             // toggle tertiary nav visibility
-            $tertiaryNavTrigger.on('click', function() {
-                $tertiaryNavTrigger.toggleClass('active');
-                $tertiaryNavContainer.toggleClass('active');
+            $tertiaryNavTriggerV1.on('click', function() {
+                $tertiaryNavTriggerV1.toggleClass('active');
+                $tertiaryNavContainerV1.toggleClass('active');
 
                 // track when opening menu
-                if ($tertiaryNavTrigger.hasClass('active')) {
+                if ($tertiaryNavTriggerV1.hasClass('active')) {
                     window.gaTrack(['_trackEvent', 'Fx Family Nav Interactions', 'Side Menu', 'Open Menu']);
                 }
             }).addClass('visible');
 
-            $tertiaryNavContainer.on('mouseover', function() {
-                $tertiaryNavContainer.addClass('active');
-                $tertiaryNavTrigger.addClass('active');
+            $tertiaryNavContainerV1.on('mouseover', function() {
+                $tertiaryNavContainerV1.addClass('active');
+                $tertiaryNavTriggerV1.addClass('active');
             }).on('mouseout', function() {
-                $tertiaryNavContainer.removeClass('active');
-                $tertiaryNavTrigger.removeClass('active');
+                $tertiaryNavContainerV1.removeClass('active');
+                $tertiaryNavTriggerV1.removeClass('active');
             });
 
-            $fxFamilyHeader.on('mouseleave', function() {
-                $tertiaryNavContainer.removeClass('active');
-                $tertiaryNavTrigger.removeClass('active');
+            $fxFamilyHeaderV1.on('mouseleave', function() {
+                $tertiaryNavContainerV1.removeClass('active');
+                $tertiaryNavTriggerV1.removeClass('active');
             });
 
             // ensure only browsers that support CSS transforms
             // get the sticky nav (matchMedia support overlap is
             // almost exact)
             if (mqDesktop) {
-                $fxFamilyHeader.waypoint('sticky', {
-                    offset: -120
+                $fxFamilyHeaderV1.waypoint('sticky', {
+                    offset: -80
                 });
             }
         };
 
         // remove all desktop interactions (mobile clean-up)
         var _disableDesktop = function() {
-            $subNavContainer.addClass('hidden');
-            $tertiaryNavContainer.removeClass('active');
+            $subNavContainerV1.addClass('hidden');
+            $tertiaryNavContainerV1.removeClass('active');
 
             $primaryLinks.off();
-            $fxFamilyNav.off();
-            $tertiaryNavTrigger.off();
-            $tertiaryNavContainer.off();
-            $fxFamilyHeader.off();
+            $fxFamilyNavV1.off();
+            $tertiaryNavTriggerV1.off();
+            $tertiaryNavContainerV1.off();
+            $fxFamilyHeaderV1.off();
 
             if (mqDesktop) {
-                $fxFamilyHeader.waypoint('unsticky');
+                $fxFamilyHeaderV1.waypoint('unsticky');
             }
         };
 
@@ -217,7 +217,7 @@ if (typeof window.Mozilla === 'undefined') {
         // pulls element with ctaId into container within nav
         // retains all event listeners
         var _setCTA = function(ctaId) {
-            $ctaWrapper.append($('#' + ctaId));
+            $ctaWrapperV1.append($('#' + ctaId));
         };
 
         // analytics
@@ -242,7 +242,7 @@ if (typeof window.Mozilla === 'undefined') {
 
                 var parentName = $this.data('id').split('-');
 
-                var trackName = ($fxFamilyHeader.hasClass('stuck')) ? parentName[0] + ' - Persistent Nav' : parentName[0];
+                var trackName = ($fxFamilyHeaderV1.hasClass('stuck')) ? parentName[0] + ' - Persistent Nav' : parentName[0];
 
                 if (e.metaKey || e.ctrlKey) {
                     window.gaTrack(['_trackEvent', 'Fx Family Nav Interactions', trackName, parentName[1]]);

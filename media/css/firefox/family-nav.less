@@ -27,12 +27,12 @@
 }
 
 // <header> containing all family nav stuff: logo, tabzilla link, & <nav>
-#fxfamilynav-header {
+.fxfamilynav-header {
     .clearfix();
     position: relative;
     z-index: 10;
     width: 100%;
-    height: 210px;
+    height: 160px;
     border-top: 2px solid #fff;
     background-color: transparent;
     // Safari 5.1+, Chrome 10+
@@ -42,8 +42,8 @@
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
     background-repeat: no-repeat;
-    background-position: 0 0, 0 120px;
-    .background-size(100% 120px, 100% 90px);
+    background-position: 0 0, 0 80px;
+    .background-size(100% 80px, 100% 80px);
     .transition(background 0.2s ease);
 
     .container {
@@ -104,12 +104,12 @@
 }
 
 // <nav> element containing primary, sub, and tertiary navs
-#fxfamilynav {
+.fxfamilynav {
     display: block;
     float: left;
     width: 592px;
-    height: 160px;
-    margin-top: 50px;
+    height: 150px;
+    margin-top: 10px;
 
     ul {
         .clearfix();
@@ -156,7 +156,7 @@
 
         &.subnav a {
             opacity: 0.8;
-            height: 87px;
+            height: 77px;
 
             &.selected,
             &:hover {
@@ -232,8 +232,8 @@
     }
 }
 
-#fxfamilynav-subnav {
-    height: 90px;
+.fxfamilynav-subnav {
+    height: 80px;
     overflow: hidden;
 
     // Mobile
@@ -241,11 +241,11 @@
         display: none;
     }
 }
-#fxfamilynav-tertiarynav {
+.fxfamilynav-tertiarynav {
     display: none;
     position: absolute;
     right: 2px;
-    top: 189px;
+    top: 145px;
     z-index: 10;
     height: auto;
     width: (238px - (@baseLine * 2));
@@ -299,14 +299,14 @@
     }
 }
 
-#fxfamilynav-cta-wrapper {
+.fxfamilynav-cta-wrapper {
     opacity: 0;
     visibility: hidden;
     float: left;
     width: 160px;
     height: 50px;
     overflow: hidden;
-    margin: 140px (@baseLine * 1.5) 0 4px;
+    margin: 95px (@baseLine * 1.5) 0 4px;
     .transition(all 0.2s ease);
 
     // Desktop wide
@@ -321,7 +321,7 @@
 }
 
 // icon triggering show/hide of tertiary nav
-#fxfamilynav-tertiarynav-trigger {
+.fxfamilynav-tertiarynav-trigger {
     .clearfix();
     float: left;
     width: 36px;
@@ -329,7 +329,7 @@
     border-radius: 6px;
     background: transparent;
     color: @mozIDBlue;
-    margin-top: 150px;
+    margin-top: 106px;
     border: none;
     letter-spacing: 0px;
     background: transparent;
@@ -342,7 +342,7 @@
         .visually-hidden();
     }
 
-    #trigger-dots {
+    .trigger-dots {
         width: 22px;
         margin: 0 auto;
 
@@ -388,11 +388,11 @@
     }
 }
 
-#fxfamilynav-logo {
+.fxfamilynav-logo {
     float: left;
     width: 140px;
     height: 146px;
-    margin: 38px @baseLine 0 (@baseLine / 2);
+    margin: 8px @baseLine 0 (@baseLine / 2);
     .fxfamilynav-sprite(0);
     .image-replaced();
     .transition(transform 0.3s ease);
@@ -415,7 +415,7 @@
     }
 }
 
-#fxfamilynav-tabzilla {
+.fxfamilynav-tabzilla {
     position: absolute;
     top: -2px;
     right: 0;
@@ -440,7 +440,7 @@
 // State styles - sticky nav and dark text version
 
 // broken out for readability
-#fxfamilynav-header {
+.fxfamilynav-header {
     &.dark {
         ul {
             a.selected {
@@ -460,19 +460,32 @@
         .icon-mwc {
             .fxfamilynav-sprite(-253px);
         }
+
+        .fxfamilynav-tertiarynav-trigger {
+            .trigger-dot {
+                background: @mozIDBlue;
+            }
+
+            &:hover,
+            &.active {
+                .trigger-dot {
+                    background: #fff;
+                }
+            }
+        }
     }
 
     &.stuck {
         position: fixed;
         z-index: 200; // seems to be above everything on /firefox/partners...
-        .transform(translateY(-124px));
+        .transform(translateY(-84px));
         background: #fff;
         background: rgba(255, 255, 255, 0.97);
         background-image: none;
         box-shadow: 0 1px 3px rgba(50, 50, 50, 0.4);
 
-        #fxfamilynav-logo {
-            .transform(scale(0.5) translateY(106px));
+        .fxfamilynav-logo {
+            .transform(scale(0.5) translateY(80px));
         }
 
         ul.subnav a {
@@ -488,7 +501,7 @@
             .fxfamilynav-sprite(-253px);
         }
 
-        #fxfamilynav-tertiarynav-trigger {
+        .fxfamilynav-tertiarynav-trigger {
             .trigger-dot {
                 background: @mozIDBlue;
             }
@@ -501,9 +514,14 @@
             }
         }
 
-        #fxfamilynav-cta-wrapper {
+        .fxfamilynav-cta-wrapper {
             opacity: 1;
             visibility: visible;
         }
     }
+}
+
+// V2!
+#fxfamilynavV2-header {
+    display: none;
 }
