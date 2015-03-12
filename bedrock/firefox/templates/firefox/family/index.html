@@ -1,0 +1,123 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% extends "firefox/base-resp.html" %}
+
+{% block page_title_prefix %}{% endblock %}
+{% block page_title %}{{ _('Firefox — Desktop browser, Android, OS, Hello, Sync, Marketplace') }}{% endblock %}
+{% block page_desc %}{{ _('Learn more about our complete lineup of products for desktop and mobile browsing (and more) that help keep you in control online. Free yourself with Firefox.') }}{% endblock %}
+
+{% block site_css %}
+  {% stylesheet 'firefox_family' %}
+{% endblock %}
+
+{% block body_class %}mozid{% endblock %}
+
+{% block site_header %}{% endblock %}
+
+{% block content %}
+
+<div id="conditional-download-bar" class="visible">
+  <div class="content">
+    <div id="dlbar-fx-desktop">
+      {{ _('You’re using an older version of Firefox for desktop.') }}
+      {{ _('Update today to stay fast and safe.') }}
+      <a class="button-flat" href="{{ url('firefox.new') }}">{{ _('Download') }}</a>
+    </div>
+    <div id="dlbar-nonfx-desktop">
+      {{ _('Choose Independent.') }}
+      {{ _('Choose Firefox.') }}
+    </div>
+    <div id="dlbar-nonfx-android">
+      <a rel="external" href="{{ settings.GOOGLE_PLAY_FIREFOX_LINK }}">{{ _('Get Firefox for Android') }}</a>
+    </div>
+    <div id="dlbar-ios">
+      {{ _('Firefox is coming soon to iOS! <a href="%s">Sign up to learn more</a>.')|format(url('newsletter.ios')) }}
+    </div>
+  </div>{#-- /.content --#}
+</div>{#-- /#conditional-download-bar --#}
+
+<section id="header">
+  <div class="content">
+    <h1>
+    {% if request.locale.startswith('en') %}
+      Free <span>yourself with</span> {{ high_res_img('img/firefox/family/index/firefox-wordmark.png', {'alt': 'Firefox', 'width': '330', 'height': '95'}) }}
+    {% else %}
+      {{ _('Free yourself with %s')|format(high_res_img('img/firefox/family/index/firefox-wordmark.png', {'alt': 'Firefox', 'width': '330', 'height': '95'})) }}
+    {% endif %}
+    </h1>
+  </div>{#-- /.content --#}
+</section>{#-- /#header --#}
+
+<div id="fox"></div>
+
+<section id="products-primary">
+  <div class="content">
+    <ul class="product-list">
+      <li id="desktop">
+        {# L10n: <span> tag below adds visual style to "for" text #}
+        <h2><a href="{{ url('firefox.desktop.index') }}">{{ _('Firefox <span>for</span> desktop') }}</a></h2>
+        <h3>{{ _('Trusted. Flexible. Fast.') }}</h3>
+
+        <div id="img-desktop"></div>
+      </li>
+      <li id="android">
+        {# L10n: <span> tag below adds visual style to "for" text #}
+        <h2><a href="{{ url('firefox.android.index') }}">{{ _('Firefox <span>for</span> Android') }}</a></h2>
+        <h3>{{ _('Make it uniquely yours.') }}</h3>
+
+        <a rel="external" href="{{ settings.GOOGLE_PLAY_FIREFOX_LINK }}" id="img-google-play">{{ _('Get it on Google Play') }}</a>
+
+        <div id="img-android"></div>
+        <div id="img-android-robot"></div>
+      </li>
+      <li id="fxos">
+        <h2><a href="{{ url('firefox.os.index') }}">{{ _('Firefox OS') }}</a></h2>
+        <h3>{{ _('Get just what you need.') }}</h3>
+
+        <div id="img-fxos"></div>
+      </li>
+    </ul>
+  </div>{#-- /.content --#}
+</section>{#-- /#products-primary --#}
+
+<section id="products-secondary">
+  <div class="content">
+    <ul class="product-list">
+      <li id="hello">
+        <h2><a href="{{ url('firefox.hello') }}">{{ _('Firefox Hello') }}</a></h2>
+        <h3>{{ _('Free, easy video conversations.') }}</h3>
+      </li>
+      <li id="marketplace">
+        <h2><a rel="external" href="https://marketplace.firefox.com/">{{ _('Firefox Marketplace') }}</a></h2>
+        <h3>{{ _('Discover and download Web apps.') }}</h3>
+      </li>
+      <li id="sync">
+        <h2><a href="{{ url('firefox.sync') }}">{{ _('Sync') }}</a></h2>
+        <h3>{{ _('Connect Firefox wherever you use it.') }}</h3>
+      </li>
+    </ul>
+  </div>{#-- /.content --#}
+</section>{#-- /#products-secondary --#}
+
+{% endblock %}
+
+{% block site_footer %}
+<footer id="footer">
+  <a href="{{ url('mozorg.home') }}">Mozilla</a>
+  <ul>
+    <li>
+      <a href="{{ url('privacy') }}">{{ _('Privacy Policy') }}</a>
+    </li>
+    <li>
+      <a href="{{ url('privacy.notices.websites') }}#cookies">{{ _('Cookies') }}</a>
+    </li>
+    <li>
+      <a href="{{ url('legal.index') }}">{{ _('Legal Notices') }}</a>
+    </li>
+  </ul>
+</footer>
+{% endblock %}
+
+{% block email_form %}{% endblock %}

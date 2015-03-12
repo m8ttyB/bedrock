@@ -1,0 +1,208 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+@import "../../sandstone/lib.less";
+
+// potential general styles for new mozilla id themed pages
+@mozIDBlue: #0c99d5;
+
+.mozid {
+    color: #fff;
+
+    #outer-wrapper {
+        background: @mozIDBlue;
+    }
+
+    a {
+        color: #fff;
+
+        &:hover,
+        &:focus,
+        &:active {
+            //text-decoration: underline;
+        }
+    }
+
+    #wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6, .huge, .large {
+        color: #fff;
+        text-shadow: none;
+    }
+}
+
+.content {
+    .border-box();
+    width: @breakDesktopWide;
+    margin: 0 auto;
+
+    @media (max-width: @breakDesktopWide) {
+        width: @breakDesktop;
+    }
+
+    @media (max-width: @breakDesktop) {
+        width: @breakTablet;
+    }
+
+    @media (max-width: @breakTablet) {
+        width: 100%;
+        padding: @baseLine / 2;
+    }
+}
+
+// page specific styles
+.fxfamily-sprite(@posx, @posy) {
+    background-image: url(/media/img/firefox/family/index/sprite.png);
+    background-position: @posx @posy;
+    overflow: hidden;
+
+    @media (-webkit-min-device-pixel-ratio: 1.5),
+       (                min-resolution: 1.5dppx),
+       (                min-resolution: 144dpi) {
+
+    }
+}
+
+ul {
+    margin: 0;
+}
+
+// conditional download bar
+#conditional-download-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    background: #fff;
+    color: @textColorPrimary;
+    .transform(translateY(-51px));
+    .transition(all 0.25s ease);
+
+    &.visible {
+        .transform(translateY(0));
+    }
+}
+
+// header
+#header {
+    position: relative;
+    height: 570px;
+    z-index: 2;
+    overflow: hidden;
+
+    .content {
+        padding: (@baseLine * 2) 0 0 70px;
+        overflow-y: visible;
+    }
+}
+
+#fox {
+    position: absolute;
+    top: -129px;
+    left: 663px;
+    width: 1184px;
+    height: 704px;
+    background: url(/media/img/firefox/family/index/fox.png) left top no-repeat;
+}
+
+.product-list {
+    .clearfix();
+    margin: 0;
+    list-style-type: none;
+
+    li {
+        float: left;
+        margin: 0;
+        width: (460px - (@baseLine * 2));
+        padding: (@baseLine * 2) @baseLine 0;
+
+        @media (max-width: @breakDesktopWide) {
+            width: (320px - @baseLine);
+            padding-left: @baseLine / 2;
+            padding-right: @baseLine / 2;
+        }
+    }
+
+    h2 a {
+        .trailing-arrow();
+        text-decoration: none;
+    }
+}
+
+#products-primary {
+    background: #00a7e0;
+
+    li {
+        text-align: center;
+    }
+
+    h2 {
+        .font-size(36px);
+    }
+
+    h3 {
+        .font-size(18px);
+    }
+
+    .container {
+        padding: 0 (@baseLine / 2);
+    }
+
+    @media (max-width: @breakDesktopWide) {
+        h2 {
+            .font-size(30px);
+        }
+
+        h3 {
+            .font-size(@largeFontSize);
+        }
+    }
+}
+
+#img-desktop {
+    .fxfamily-sprite(0px, 0px);
+    width: 307px;
+    height: 148px;
+}
+
+#img-android {
+    .fxfamily-sprite(0px, -148px);
+    width: 309px;
+    height: 177px;
+}
+
+#img-android-robot {
+    .fxfamily-sprite(0px, -660px);
+    width: 66px;
+    height: 90px;
+}
+
+#img-google-play {
+    .fxfamily-sprite(120px, -579px);
+    width: 135px;
+    height: 48px;
+    display: block;
+    //.image-replaced();
+}
+
+#img-fxos {
+    .fxfamily-sprite(0px, -325px);
+    width: 221px;
+    height: 146px;
+}
+
+#products-secondary {
+    background: #efefef;
+}
+
+#footer {
+    background: #fff;
+}
